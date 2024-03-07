@@ -1,4 +1,4 @@
-import {setLocalStorage} from "./utils.mjs";
+import {setLocalStorage, renderTemplate} from "./utils.mjs";
 
 function productDetailsTemplate(product){
   const newProduct = `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
@@ -25,8 +25,7 @@ function productDetailsTemplate(product){
         this.product = {};
         this.dataSource = dataSource;
       }
-      async init() {
-        
+    async init() {
         this.product = await this.dataSource.findProductById(this.productId)
         this.renderProductDetails("main");
         document
@@ -37,7 +36,5 @@ function productDetailsTemplate(product){
         setLocalStorage("so-cart", this.product);
     }
     renderProductDetails(selector){
-      const element = document.querySelector(selector);
-      element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
-    }
+      renderTemplate(productDetailsTemplate, selector, this.product);}
     }
