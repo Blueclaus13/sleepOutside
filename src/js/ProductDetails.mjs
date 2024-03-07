@@ -13,20 +13,34 @@ function convertToJson(res) {
         this.dataSource = dataSource;
       }
       async init() {
-        // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
-        // once we have the product details we can render out the HTML
-        // once the HTML is rendered we can add a listener to Add to Cart button
-        // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
+        const list = await this.datasource.getData();
+        this.product = list.findProductById(this.productId)
+        this.renderProductDetails(this.product);
         document.getElementById('addToCart')
           .addEventListener('click', this.addToCart.bind(this));
         }
-    addProductToCart(product) {
+    addToCart(product) {
         let cart = getLocalStorage("so-cart") ?? [];
         cart.push(product);
         setLocalStorage("so-cart", cart);
     }
     renderProductDetails(product){
-            const newProduct = ``
+            const newProduct = `<section class="products">
+            <h2>Top Products</h2>
+            <ul class="product-list">
+              <li class="product-card">
+                <a href="product_pages/?product=${product.Id}">
+                <img
+                  src="${product.Image}"
+                  alt="${product.Name}"
+                />
+                <h3 class="card__brand">${product.Brand.Name}</h3>
+                <h2 class="card__name">${product.NameWithoutBrand}</h2>
+                <p class="product-card__price">$${product.FinalPrice}</p></a>
+              </li>
+              </ul>
+              </section>`;
+              return newProduct;
     }
 
     }
