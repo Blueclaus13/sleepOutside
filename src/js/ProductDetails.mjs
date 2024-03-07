@@ -1,10 +1,23 @@
-function convertToJson(res) {
-    if (res.ok) {
-      return res.json();
-    } else {
-      throw new Error("Bad Response");
-    }
-  }
+import {setLocalStorage} from "./utils.mjs";
+
+function productDetailsTemplate(product){
+  const newProduct = `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
+        <h2 class="divider">${product.NameWithoutBrand}</h2>
+        <img
+          class="divider"
+          src="${product.Image}"
+          alt="${product.NameWithoutBrand}"
+        />
+        <p class="product-card__price">$${product.FinalPrice}</p>
+        <p class="product__color">${product.Colors[0].ColorName}</p>
+        <p class="product__description">
+        ${product.DescriptionHtmlSimple}
+        </p>
+      <div class="product-detail__add">
+        <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+      </div></section>`;
+    return newProduct;
+}
   
   export default class ProductDetails {
     constructor(productId, dataSource){
@@ -13,34 +26,18 @@ function convertToJson(res) {
         this.dataSource = dataSource;
       }
       async init() {
-        const list = await this.datasource.getData();
-        this.product = list.findProductById(this.productId)
-        this.renderProductDetails(this.product);
-        document.getElementById('addToCart')
+        
+        this.product = await this.dataSource.findProductById(this.productId)
+        this.renderProductDetails("main");
+        document
+          .getElementById('addToCart')
           .addEventListener('click', this.addToCart.bind(this));
         }
-    addToCart(product) {
-        let cart = getLocalStorage("so-cart") ?? [];
-        cart.push(product);
-        setLocalStorage("so-cart", cart);
+    addToCart() {
+        setLocalStorage("so-cart", this.product);
     }
-    renderProductDetails(product){
-            const newProduct = `<section class="products">
-            <h2>Top Products</h2>
-            <ul class="product-list">
-              <li class="product-card">
-                <a href="product_pages/?product=${product.Id}">
-                <img
-                  src="${product.Image}"
-                  alt="${product.Name}"
-                />
-                <h3 class="card__brand">${product.Brand.Name}</h3>
-                <h2 class="card__name">${product.NameWithoutBrand}</h2>
-                <p class="product-card__price">$${product.FinalPrice}</p></a>
-              </li>
-              </ul>
-              </section>`;
-              return newProduct;
+    renderProductDetails(selector){
+      const element = document.querySelector(selector);
+      element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
     }
-
     }
