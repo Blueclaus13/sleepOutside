@@ -35,3 +35,22 @@ export function renderListWithTemplate(
   }
   parentElement.insertAdjacentHTML(position, htmlItems.join(""));
 }
+
+export function getParams(param){
+  
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get(param);
+
+  return product;
+}
+
+export function renderTemplate(
+  templateFn,
+  parentElement,
+  object,
+  position = "afterbegin",
+){
+  const element = document.querySelector(parentElement);
+  element.insertAdjacentHTML(position, templateFn(object));
+}
