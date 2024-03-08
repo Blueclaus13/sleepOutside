@@ -20,10 +20,11 @@ function productDetailsTemplate(product){
 }
   
   export default class ProductDetails {
-    constructor(productId, dataSource){
+    constructor(productId, dataSource, localStore){
         this.productId = productId;
         this.product = {};
         this.dataSource = dataSource;
+        this.localStore = localStore ?? [];
       }
     async init() {
         this.product = await this.dataSource.findProductById(this.productId)
@@ -33,7 +34,8 @@ function productDetailsTemplate(product){
           .addEventListener('click', this.addToCart.bind(this));
         }
     addToCart() {
-        setLocalStorage("so-cart", this.product);
+        this.localStore.push(this.product)
+        setLocalStorage("so-cart", this.localStore);
     }
     renderProductDetails(selector){
       renderTemplate(productDetailsTemplate, selector, this.product);}
