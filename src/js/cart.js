@@ -9,6 +9,7 @@ function renderCartContents() {
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
+  <div class="cart-closed"><p id="${item.Id}">X</p></div>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"

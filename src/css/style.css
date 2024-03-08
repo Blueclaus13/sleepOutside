@@ -128,7 +128,9 @@ button {
   justify-content: space-between;
   list-style-type: none;
   padding: 0;
+  max-width: 550px;
 }
+
 .product-list a {
   text-decoration: none;
   color: var(--dark-grey);
@@ -193,8 +195,23 @@ button {
 }
 
 .cart-card__quantity {
+  grid-row: 3;
+  grid-column: 3;
+}
+.cart-closed {
   grid-row: 1;
   grid-column: 3;
+  justify-self:right;
+  align-items: start;
+}
+.cart-closed p {
+  text-align: end;
+  font-weight: 800;
+}
+.cart-closed p:hover{
+  text-shadow: 2px 2px #f0a868 ;
+  transition: all 200ms ease-out;
+  cursor: pointer;
 }
 
 .cart-card__price {
