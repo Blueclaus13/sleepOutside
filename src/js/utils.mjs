@@ -30,13 +30,3 @@ export function getParams(param) {
 
   return product;
 }
-
-export function renderTemplate(
-  templateFn,
-  parentElement,
-  object,
-  position = "afterbegin",
-){
-  const element = document.querySelector(parentElement);
-  element.insertAdjacentHTML(position, templateFn(object));
-}
