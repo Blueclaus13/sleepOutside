@@ -39,4 +39,5 @@ function productDetailsTemplate(product){
     }
     renderProductDetails(selector){
       renderTemplate(productDetailsTemplate, selector, this.product);}
-    }
+  
+  }
