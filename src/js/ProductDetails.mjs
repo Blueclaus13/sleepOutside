@@ -1,32 +1,42 @@
-function convertToJson(res) {
-    if (res.ok) {
-      return res.json();
-    } else {
-      throw new Error("Bad Response");
-    }
-  }
+import {setLocalStorage, renderTemplate} from "./utils.mjs";
+
+function productDetailsTemplate(product){
+  const newProduct = `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
+        <h2 class="divider">${product.NameWithoutBrand}</h2>
+        <img
+          class="divider"
+          src="${product.Image}"
+          alt="${product.NameWithoutBrand}"
+        />
+        <p class="product-card__price">$${product.FinalPrice}</p>
+        <p class="product__color">${product.Colors[0].ColorName}</p>
+        <p class="product__description">
+        ${product.DescriptionHtmlSimple}
+        </p>
+      <div class="product-detail__add">
+        <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+      </div></section>`;
+    return newProduct;
+}
   
   export default class ProductDetails {
-    constructor(productId, dataSource){
+    constructor(productId, dataSource, localStore){
         this.productId = productId;
         this.product = {};
         this.dataSource = dataSource;
+        this.localStore = localStore ?? [];
       }
-      async init() {
-        // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
-        // once we have the product details we can render out the HTML
-        // once the HTML is rendered we can add a listener to Add to Cart button
-        // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
-        document.getElementById('addToCart')
+    async init() {
+        this.product = await this.dataSource.findProductById(this.productId)
+        this.renderProductDetails("main");
+        document
+          .getElementById('addToCart')
           .addEventListener('click', this.addToCart.bind(this));
         }
-    addProductToCart(product) {
-        let cart = getLocalStorage("so-cart") ?? [];
-        cart.push(product);
-        setLocalStorage("so-cart", cart);
+    addToCart() {
+        this.localStore.push(this.product)
+        setLocalStorage("so-cart", this.localStore);
     }
-    renderProductDetails(product){
-            const newProduct = ``
-    }
-
+    renderProductDetails(selector){
+      renderTemplate(productDetailsTemplate, selector, this.product);}
     }
