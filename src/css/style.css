@@ -128,7 +128,6 @@ button {
   justify-content: space-between;
   list-style-type: none;
   padding: 0;
-  max-width: 550px;
 }
 
 .product-list a {
@@ -175,6 +174,7 @@ button {
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+  max-width: 550px;
 }
 
 .cart-card__image {

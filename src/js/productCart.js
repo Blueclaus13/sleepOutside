@@ -28,7 +28,13 @@ function cartItemTemplate(item) {
     async init() {
       const element = document.querySelector(".product-list");
       this.renderProducts(element);
-      console.log(this.getProductsId())
+      console.log(this.getProductsId());
+      const listId = this.getProductsId();
+      listId.forEach(element => {
+        document
+          .getElementById(element)
+          .addEventListener('click', this.deleteItem());
+      });
     }
     //initialize the variable with an empty array if the LocalStorage is empty.
     // const cartItems = getLocalStorage("so-cart") ?? [];
@@ -44,7 +50,7 @@ function cartItemTemplate(item) {
     }
   
     deleteItem(){
-  
+        console.log("delete")
     }
   
   }
