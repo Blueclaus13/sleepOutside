@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+
+>>>>>>> parent of c0a0873 (Merge branch 'ss' of https://github.com/Blueclaus13/sleepOutside)
 function convertToJson(res) {
     if (res.ok) {
       return res.json();
@@ -5,6 +10,7 @@ function convertToJson(res) {
       throw new Error("Bad Response");
     }
   }
+<<<<<<< HEAD
   
   export default class ProductDetails {
     constructor(productId, dataSource){
@@ -30,3 +36,7 @@ function convertToJson(res) {
     }
 
     }
+=======
+
+}
+>>>>>>> parent of c0a0873 (Merge branch 'ss' of https://github.com/Blueclaus13/sleepOutside)
