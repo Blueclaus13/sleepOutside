@@ -204,11 +204,14 @@ button {
   justify-self:right;
   align-items: start;
 }
-.cart-closed p {
+.cart-closed button {
   text-align: end;
   font-weight: 800;
+  border: none;
+  background-color: white;
+  color: black;
 }
-.cart-closed p:hover{
+.cart-closed button:hover{
   text-shadow: 2px 2px #f0a868 ;
   transition: all 200ms ease-out;
   cursor: pointer;

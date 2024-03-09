@@ -5,11 +5,12 @@ function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") ?? [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
 }
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
-  <div class="cart-closed"><p id="${item.Id}">X</p></div>
+  <div class="cart-closed"><button id="${item.Id}">X</button></div>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -27,4 +28,11 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+function onClosed( itemId){
+  console.log(itemId.target.id + "Item to delete");
+
+}
+
 renderCartContents();
+const button = document.getElementsByTagName("button");
+button.addEventListener("click", onClosed);
