@@ -33,7 +33,7 @@ function cartItemTemplate(item) {
       listId.forEach(element => {
         document
           .getElementById(element)
-          .addEventListener('click', this.deleteItem());
+          .addEventListener('click', this.deleteItem);
       });
     }
     //initialize the variable with an empty array if the LocalStorage is empty.
