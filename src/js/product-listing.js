@@ -1,6 +1,6 @@
-import ProductData from "..js/ProductData.mjs";
-import ProductList from "..js/ProductList.mjs";
-import { getParams } from "../js/utils.mjs";
+import ProductData from "../js/ProductData.mjs";
+import ProductList from "../js/ProductList.mjs";
+import { getParams } from "./utils.mjs";
 
 
 const category = getParams("category");
