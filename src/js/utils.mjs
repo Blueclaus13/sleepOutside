@@ -61,11 +61,6 @@ export async function loadHeaderFooter(){
   const headerTemplate = await loadTemplate("../partials/header.html");
   renderWithTemplate(footerTemplate, footer);
   renderWithTemplate(headerTemplate, header);
-
-  // const html = await fetch(path).then(convertToText);
-  // const template = document.createElement('template');
-  // template.innerHTML = html;
-  // return template;
 }
 
 export function getParams(param){

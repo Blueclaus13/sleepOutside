@@ -6,7 +6,7 @@ function productCardTemplate(product) {
     let finalPrice = parseInt(product.FinalPrice);
     if (finalPrice < listPrice) {
         newProduct = `<li class="product-card">
-        <a href="product_pages/index.html?product=${product.Id}">
+        <a href="../product_pages/index.html?product=${product.Id}">
             <img src="${product.Image}" alt="Image of ${product.Name}">
             <h3 class="card_brand">${product.Brand.Name}</h3>
             <h2 class="card_name">${product.Name}</h2>
@@ -18,7 +18,7 @@ function productCardTemplate(product) {
     }
     else {
         newProduct = `<li class="product-card">
-            <a href="product_pages/index.html?product=${product.Id}">
+            <a href="../product_pages/index.html?product=${product.Id}">
                 <img src="${product.Image}" alt="Image of ${product.Name}">
                 <h3 class="card_brand">${product.Brand.Name}</h3>
                 <h2 class="card_name">${product.Name}</h2>
