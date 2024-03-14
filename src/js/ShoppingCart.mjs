@@ -20,7 +20,7 @@ function cartItemTemplate(item) {
     return newItem;
   }
   
-  export default class RenderCart {
+  export default class ShoppingCart {
     constructor(cartItems){
       this.cartItems = cartItems ?? [];
     }
