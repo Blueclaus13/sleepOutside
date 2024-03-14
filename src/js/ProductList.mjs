@@ -7,7 +7,7 @@ function productCardTemplate(product) {
     <p class="product-card_price"><s>$${product.ListPrice}</s></p>` : "";
     const newProduct = `<li class="product-card">
             <a href="../product_pages/index.html?product=${product.Id}">
-                <img src="${product.Image}" alt="Image of ${product.Name}">
+                <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.Name}">
                 <h3 class="card_brand">${product.Brand.Name}</h3>
                 <h2 class="card_name">${product.Name}</h2>
                 ${saleHTML}
