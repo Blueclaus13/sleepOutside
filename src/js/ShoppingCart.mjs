@@ -51,13 +51,12 @@ function cartItemTemplate(item) {
   
     deleteItem= e => {
       console.log(e.target.id);
-      //const storedItem = this.cartItems.find((i)=> i.Id == e.target.id);
       const storedItem = this.cartItems.filter((item)=>item.Id != e.target.id);
-      this.cartItems = storedItem;
+      this.cartItems = storedItem ?? [];
       setLocalStorage("so-cart", storedItem);
       const element = document.querySelector(".product-list");
-      // element.replaceChildren();
-      // this.renderProducts(element);
+      element.replaceChildren();
+      this.renderProducts(element);
       console.log(storedItem);
     }
   
