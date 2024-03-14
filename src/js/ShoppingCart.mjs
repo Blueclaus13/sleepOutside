@@ -28,18 +28,8 @@ function cartItemTemplate(item) {
     async init() {
       const element = document.querySelector(".product-list");
       this.renderProducts(element);
-      console.log(this.getProductsId());
-      const listId = this.getProductsId();
-      listId.forEach(element => {
-        document
-          .getElementById(element)
-          .addEventListener('click', this.deleteItem.bind(this));
-      });
+      this.addListenerToElements();
     }
-    //initialize the variable with an empty array if the LocalStorage is empty.
-    // const cartItems = getLocalStorage("so-cart") ?? [];
-    // const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    // document.querySelector(".product-list").innerHTML = htmlItems.join("");
   
     renderProducts(element){
       renderListWithTemplate(cartItemTemplate, element, this.cartItems);
@@ -57,7 +47,18 @@ function cartItemTemplate(item) {
       const element = document.querySelector(".product-list");
       element.replaceChildren();
       this.renderProducts(element);
+      this.addListenerToElements();
       console.log(storedItem);
+    }
+
+    addListenerToElements(){
+      console.log(this.getProductsId());
+      const listId = this.getProductsId();
+      listId.forEach(element => {
+        document
+          .getElementById(element)
+          .addEventListener('click', this.deleteItem.bind(this));
+      });
     }
   
   }
