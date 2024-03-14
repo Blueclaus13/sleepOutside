@@ -1,4 +1,4 @@
-import {setLocalStorage, renderListWithTemplate} from "./utils.mjs";
+import {setLocalStorage, renderListWithTemplate, getLocalStorage} from "./utils.mjs";
 
 function cartItemTemplate(item) {
     const newItem = `<li class="cart-card divider">
@@ -33,7 +33,7 @@ function cartItemTemplate(item) {
       listId.forEach(element => {
         document
           .getElementById(element)
-          .addEventListener('click', this.deleteItem);
+          .addEventListener('click', this.deleteItem.bind(this));
       });
     }
     //initialize the variable with an empty array if the LocalStorage is empty.
@@ -49,8 +49,16 @@ function cartItemTemplate(item) {
         return idList;
     }
   
-    deleteItem(){
-        console.log("delete")
+    deleteItem= e => {
+      console.log(e.target.id);
+      //const storedItem = this.cartItems.find((i)=> i.Id == e.target.id);
+      const storedItem = this.cartItems.filter((item)=>item.Id != e.target.id);
+      this.cartItems = storedItem;
+      setLocalStorage("so-cart", storedItem);
+      const element = document.querySelector(".product-list");
+      // element.replaceChildren();
+      // this.renderProducts(element);
+      console.log(storedItem);
     }
   
   }
