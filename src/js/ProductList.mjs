@@ -5,7 +5,6 @@ function productCardTemplate(product) {
     let finalPrice = parseInt(product.FinalPrice);
     const saleHTML = finalPrice < listPrice ? `<p class="product-card_price">ON SALE</p>
     <p class="product-card_price"><s>$${product.ListPrice}</s></p>` : "";
-
     const newProduct = `<li class="product-card">
             <a href="../product_pages/index.html?product=${product.Id}">
                 <img src="${product.Image}" alt="Image of ${product.Name}">
@@ -15,27 +14,6 @@ function productCardTemplate(product) {
                 <p class="product-card_price">$${product.FinalPrice}</p>
             </a>
         </li>`;
-    // if (finalPrice < listPrice) {
-    //     newProduct = `<li class="product-card">
-    //     <a href="../product_pages/index.html?product=${product.Id}">
-    //         <img src="${product.Image}" alt="Image of ${product.Name}">
-    //         <h3 class="card_brand">${product.Brand.Name}</h3>
-    //         <h2 class="card_name">${product.Name}</h2>
-    //         <p class="product-card_price">$${product.FinalPrice}</p>
-    //     </a>
-    // </li>`;
-    // }
-    // else {
-    //     newProduct = `<li class="product-card">
-    //         <a href="../product_pages/index.html?product=${product.Id}">
-    //             <img src="${product.Image}" alt="Image of ${product.Name}">
-    //             <h3 class="card_brand">${product.Brand.Name}</h3>
-    //             <h2 class="card_name">${product.Name}</h2>
-    //             <p class="product-card_price">$${product.FinalPrice}</p>
-    //         </a>
-    //     </li>`;
-    // }
-
     return newProduct;
 }
 
