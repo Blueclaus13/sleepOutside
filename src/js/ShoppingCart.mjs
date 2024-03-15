@@ -5,7 +5,7 @@ function cartItemTemplate(item) {
     <div class="cart-closed"><button id="${item.Id}">X</button></div>
     <a href="#" class="cart-card__image">
       <img
-        src="${item.Image}"
+        src="${item.Images.PrimarySmall}"
         alt="${item.Name}"
       />
     </a>
