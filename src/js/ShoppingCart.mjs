@@ -1,4 +1,4 @@
-import {setLocalStorage, renderListWithTemplate, getLocalStorage} from "./utils.mjs";
+import {setLocalStorage, renderListWithTemplate, replaceElement, renderTemplate} from "./utils.mjs";
 
 function cartItemTemplate(item) {
     const newItem = `<li class="cart-card divider">
@@ -19,16 +19,35 @@ function cartItemTemplate(item) {
   
     return newItem;
   }
+
+  function totalCartTemplate(quantity) {
+    return `<p id='total'>
+            Total: ${quantity}
+            </p>`;
+  }
   
   export default class ShoppingCart {
     constructor(cartItems){
       this.cartItems = cartItems ?? [];
+      this.total = 0;
     }
   
     async init() {
       const element = document.querySelector(".product-list");
       this.renderProducts(element);
       this.addListenerToElements();
+      const totalDiv = document.getElementById("cart-total");
+      if(this.cartItems.length !== 0){
+        totalDiv.classList.remove("hidden");
+        this.sumTotal();
+      }
+      renderTemplate(totalCartTemplate, "#cart-total", this.total);
+    }
+
+    sumTotal(){
+      let result = this.cartItems.reduce((total, item)=>{
+        return total + parseFloat(item.FinalPrice);}, 0); 
+      this.total = parseFloat(result).toFixed(2);
     }
   
     renderProducts(element){
@@ -41,14 +60,19 @@ function cartItemTemplate(item) {
   
     deleteItem= e => {
       console.log(e.target.id);
+      const productList = document.querySelector(".product-list");
       const storedItem = this.cartItems.filter((item)=>item.Id != e.target.id);
       this.cartItems = storedItem ?? [];
       setLocalStorage("so-cart", storedItem);
-      const element = document.querySelector(".product-list");
-      element.replaceChildren();
-      this.renderProducts(element);
+      productList.replaceChildren();
+      this.renderProducts(productList);
       this.addListenerToElements();
+      this.sumTotal();
+      replaceElement(totalCartTemplate, "#cart-total", this.total);
       console.log(storedItem);
+      if(this.cartItems.length === 0){
+        document.querySelector("#cart-total").classList.add('hidden');
+      }
     }
 
     addListenerToElements(){

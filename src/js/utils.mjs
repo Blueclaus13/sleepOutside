@@ -48,6 +48,12 @@ export function renderWithTemplate(
   }
 }
 
+export function replaceElement(templateFn, parentElement, data){
+  const element = document.querySelector(parentElement);
+  element.replaceChildren();
+  renderTemplate(templateFn, parentElement, data);
+}
+
 async function loadTemplate(path) {
   const res = await fetch(path);
   const template = await res.text();
