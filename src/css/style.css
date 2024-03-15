@@ -275,3 +275,24 @@ footer {
   padding: 7px;
   border-radius: 50px 0px 0px 50px;
 }
+
+.cart {
+  position: relative;
+}
+
+#cart-count {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  background-color: #f0a868;
+  color: black;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}

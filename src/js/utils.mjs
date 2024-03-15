@@ -23,29 +23,29 @@ export function setClick(selector, callback) {
 }
 
 export function renderListWithTemplate(
-  templateFn, 
-  parentElement, 
-  list, 
-  position = "afterbegin", 
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
   clear = false
-  ) {
+) {
   const htmlItems = list.map(templateFn);
-  if(clear){
+  if (clear) {
     parentElement.innerHTML = "";
   }
   parentElement.insertAdjacentHTML(position, htmlItems.join(""));
 }
 
 export function renderWithTemplate(
-  template, 
-  parentElement, 
-  data, 
+  template,
+  parentElement,
+  data,
   callback
-  ) {
-    parentElement.insertAdjacentHTML("afterbegin", template);
-    if(callback) {
-      callback(data);
-    }
+) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
+  if (callback) {
+    callback(data);
+  }
 }
 
 async function loadTemplate(path) {
@@ -54,7 +54,7 @@ async function loadTemplate(path) {
   return template;
 }
 
-export async function loadHeaderFooter(){
+export async function loadHeaderFooter() {
   const footer = document.querySelector("footer");
   const footerTemplate = await loadTemplate("../partials/footer.html");
   const header = document.querySelector("header");
@@ -62,14 +62,21 @@ export async function loadHeaderFooter(){
   renderWithTemplate(footerTemplate, footer);
   renderWithTemplate(headerTemplate, header);
 
+  let cartItems = getLocalStorage("so-cart");
+  if (cartItems.length != 0) {
+    let cartCount = document.getElementById("cart-count");
+    cartCount.innerHTML = cartItems.length;
+    cartCount.classList.remove("hidden");
+  }
+
   // const html = await fetch(path).then(convertToText);
   // const template = document.createElement('template');
   // template.innerHTML = html;
   // return template;
 }
 
-export function getParams(param){
-  
+export function getParams(param) {
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param);
@@ -82,7 +89,7 @@ export function renderTemplate(
   parentElement,
   object,
   position = "afterbegin",
-){
+) {
   const element = document.querySelector(parentElement);
   element.insertAdjacentHTML(position, templateFn(object));
 }
