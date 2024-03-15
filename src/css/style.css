@@ -167,7 +167,19 @@ button {
 .product-card p {
   margin: 0.5em 0;
 }
-
+.category img{
+  width: 50px;
+  align-self: center;
+}
+.category a{
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+}
+.category p{
+  padding: 0;
+  margin: 0;
+}
 .on-sale{
   color: red;
   font-weight: 600;
@@ -266,6 +278,12 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+  .categories{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-items: center;
   }
 }
 

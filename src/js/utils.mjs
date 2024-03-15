@@ -68,11 +68,6 @@ export async function loadHeaderFooter() {
     cartCount.innerHTML = cartItems.length;
     cartCount.classList.remove("hidden");
   }
-
-  // const html = await fetch(path).then(convertToText);
-  // const template = document.createElement('template');
-  // template.innerHTML = html;
-  // return template;
 }
 
 export function getParams(param) {
@@ -93,3 +88,4 @@ export function renderTemplate(
   const element = document.querySelector(parentElement);
   element.insertAdjacentHTML(position, templateFn(object));
 }
+

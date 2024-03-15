@@ -1,4 +1,4 @@
-import {setLocalStorage, renderListWithTemplate} from "./utils.mjs";
+import {setLocalStorage, renderListWithTemplate, getLocalStorage} from "./utils.mjs";
 
 function cartItemTemplate(item) {
     const newItem = `<li class="cart-card divider">
@@ -20,7 +20,7 @@ function cartItemTemplate(item) {
     return newItem;
   }
   
-  export default class RenderCart {
+  export default class ShoppingCart {
     constructor(cartItems){
       this.cartItems = cartItems ?? [];
     }
@@ -28,18 +28,8 @@ function cartItemTemplate(item) {
     async init() {
       const element = document.querySelector(".product-list");
       this.renderProducts(element);
-      console.log(this.getProductsId());
-      const listId = this.getProductsId();
-      listId.forEach(element => {
-        document
-          .getElementById(element)
-          .addEventListener('click', this.deleteItem());
-      });
+      this.addListenerToElements();
     }
-    //initialize the variable with an empty array if the LocalStorage is empty.
-    // const cartItems = getLocalStorage("so-cart") ?? [];
-    // const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    // document.querySelector(".product-list").innerHTML = htmlItems.join("");
   
     renderProducts(element){
       renderListWithTemplate(cartItemTemplate, element, this.cartItems);
@@ -49,8 +39,26 @@ function cartItemTemplate(item) {
         return idList;
     }
   
-    deleteItem(){
-        console.log("delete")
+    deleteItem= e => {
+      console.log(e.target.id);
+      const storedItem = this.cartItems.filter((item)=>item.Id != e.target.id);
+      this.cartItems = storedItem ?? [];
+      setLocalStorage("so-cart", storedItem);
+      const element = document.querySelector(".product-list");
+      element.replaceChildren();
+      this.renderProducts(element);
+      this.addListenerToElements();
+      console.log(storedItem);
+    }
+
+    addListenerToElements(){
+      console.log(this.getProductsId());
+      const listId = this.getProductsId();
+      listId.forEach(element => {
+        document
+          .getElementById(element)
+          .addEventListener('click', this.deleteItem.bind(this));
+      });
     }
   
   }
