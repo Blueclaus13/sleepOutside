@@ -4,7 +4,7 @@ function productCardTemplate(product) {
     let listPrice = parseInt(product.ListPrice);
     let finalPrice = parseInt(product.FinalPrice);
     const saleHTML = finalPrice < listPrice ? `<p class="on-sale">ON SALE</p>
-    <p class="product-card_price_reduced">Save -$${listPrice - finalPrice}</p>
+    <p class="tag">Save -$${((product.ListPrice - product.FinalPrice).toFixed(2))}</p>
     <p class="product-card_price"><s>$${product.ListPrice}</s></p>` : "";
     const newProduct = `<li class="product-card">
             <a href="../product_pages/index.html?product=${product.Id}">

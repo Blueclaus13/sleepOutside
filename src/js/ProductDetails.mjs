@@ -4,8 +4,8 @@ function productDetailsTemplate(product) {
   
   let listPrice = parseInt(product.ListPrice);
   let finalPrice = parseInt(product.FinalPrice);
-  const saleHTML = finalPrice < listPrice ? `<p class="product-card_price">ON SALE</p>
-    <p class="tag">-$${((product.ListPrice - product.FinalPrice).toFixed(2))}</p>
+  const saleHTML = finalPrice < listPrice ? `<p class="on-sale">ON SALE</p>
+    <p class="tag">Save -$${((product.ListPrice - product.FinalPrice).toFixed(2))}</p>
     <p class="product-card_price"><s>$${product.ListPrice}</s></p>` : "";
   const newProduct = `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
         <h2 class="divider">${product.NameWithoutBrand}</h2>
