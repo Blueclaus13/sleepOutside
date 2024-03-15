@@ -1,11 +1,11 @@
 import { setLocalStorage, renderTemplate } from "./utils.mjs";
 
 function productDetailsTemplate(product) {
-  let newProduct = "";
   let listPrice = parseInt(product.ListPrice);
   let finalPrice = parseInt(product.FinalPrice);
-  if (listPrice > finalPrice) {
-    newProduct = `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
+
+  let newProduct = (listPrice > finalPrice) ?
+    `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
           <h2 class="divider">${product.NameWithoutBrand}</h2>
           <img
             class="divider"
@@ -13,6 +13,7 @@ function productDetailsTemplate(product) {
             alt="${product.NameWithoutBrand}"
           />
           <p class="product-card__price"><s>$${product.ListPrice}</s></p>
+          <p class="tag">-$${((product.ListPrice - product.FinalPrice).toFixed(2))}</p>
           <p class="product-card__price">$${product.FinalPrice}</p>
           <p class="product__color">${product.Colors[0].ColorName}</p>
           <p class="product__description">
@@ -20,10 +21,8 @@ function productDetailsTemplate(product) {
           </p>
         <div class="product-detail__add">
           <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
-        </div></section>`;
-  }
-  else {
-    newProduct = `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
+        </div></section>`:
+    `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
           <h2 class="divider">${product.NameWithoutBrand}</h2>
           <img
             class="divider"
@@ -38,7 +37,7 @@ function productDetailsTemplate(product) {
         <div class="product-detail__add">
           <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
         </div></section>`;
-  }
+
   return newProduct;
 }
 
