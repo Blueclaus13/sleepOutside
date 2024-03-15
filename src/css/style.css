@@ -148,6 +148,11 @@ button {
   margin: 0.5em 0;
 }
 
+.on-sale{
+  color: red;
+  font-weight: 600;
+}
+
 .card__brand {
   font-size: var(--small-font);
 }
