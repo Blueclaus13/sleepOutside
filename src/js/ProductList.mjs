@@ -1,11 +1,9 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
-    let newProduct = "";
     let listPrice = parseInt(product.ListPrice);
     let finalPrice = parseInt(product.FinalPrice);
-    if (finalPrice < listPrice) {
-        newProduct = `<li class="product-card">
+    let newProduct = (finalPrice < listPrice) ? `<li class="product-card">
         <a href="product_pages/index.html?product=${product.Id}">
             <img src="${product.Image}" alt="Image of ${product.Name}">
             <h3 class="card_brand">${product.Brand.Name}</h3>
@@ -14,10 +12,8 @@ function productCardTemplate(product) {
             <p class="product-card_price"><s>$${product.ListPrice}</s></p>
             <p class="product-card_price">$${product.FinalPrice}</p>
         </a>
-    </li>`;
-    }
-    else {
-        newProduct = `<li class="product-card">
+    </li>`:
+        `<li class="product-card">
             <a href="product_pages/index.html?product=${product.Id}">
                 <img src="${product.Image}" alt="Image of ${product.Name}">
                 <h3 class="card_brand">${product.Brand.Name}</h3>
@@ -25,7 +21,7 @@ function productCardTemplate(product) {
                 <p class="product-card_price">$${product.FinalPrice}</p>
             </a>
         </li>`;
-    }
+
 
     return newProduct;
 }
