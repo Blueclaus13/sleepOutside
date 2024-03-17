@@ -10,17 +10,23 @@ function convertToJson(res) {
 
 export default class ProductData {
   constructor(category){
-
+     this.category = category;
   }
-  
+ 
   async getData(category) {
-    const response = await fetch(baseURL + `products/search/${category}`);
-    const data = await convertToJson(response);
-    return data.Result;
+     const response = await fetch(baseURL + `products/search/${category}`);
+     const data = await convertToJson(response);
+     return data.Result;
   }
+ 
   async findProductById(id) {
-    const product = await fetch(baseURL + `product/${id}`);
-    const data = await convertToJson(product);
-    return data.Result;
+     const product = await fetch(baseURL + `product/${id}`);
+     const data = await convertToJson(product);
+     return data.Result;
   }
-}
+ 
+  async filterByPrice(minPrice, maxPrice) {
+     const products = await this.getData(this.category);
+     return products.filter(product => product.price >= minPrice && product.price <= maxPrice);
+  }
+ }
