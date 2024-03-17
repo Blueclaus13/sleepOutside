@@ -1,7 +1,7 @@
-import { setLocalStorage, renderTemplate } from "./utils.mjs";
+import { setLocalStorage, renderTemplate, cartCount } from "./utils.mjs";
 
 function productDetailsTemplate(product) {
-  
+
   let listPrice = parseInt(product.ListPrice);
   let finalPrice = parseInt(product.FinalPrice);
   const saleHTML = finalPrice < listPrice ? `<p class="on-sale">ON SALE</p>
@@ -43,6 +43,8 @@ export default class ProductDetails {
   addToCart() {
     this.localStore.push(this.product)
     setLocalStorage("so-cart", this.localStore);
+
+    cartCount();
   }
   renderProductDetails(selector) {
     renderTemplate(productDetailsTemplate, selector, this.product);
