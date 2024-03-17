@@ -105,6 +105,10 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #303030;
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
@@ -167,20 +171,24 @@ button {
 .product-card p {
   margin: 0.5em 0;
 }
-.category img{
+
+.category img {
   width: 50px;
   align-self: center;
 }
-.category a{
+
+.category a {
   text-decoration: none;
   color: black;
   font-weight: 700;
 }
-.category p{
+
+.category p {
   padding: 0;
   margin: 0;
 }
-.on-sale{
+
+.on-sale {
   color: red;
   font-weight: 600;
 }
@@ -279,7 +287,8 @@ button {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
   }
-  .categories{
+
+  .categories {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -299,14 +308,13 @@ footer {
   border-radius: 50px 0px 0px 50px;
 }
 
-#total{
+#total {
   text-align: end;
   font-size: 1.5em;
   font-weight: 600;
 }
 
-.hidden
-{
+.hidden {
   display: none;
 }
 

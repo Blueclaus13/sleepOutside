@@ -48,7 +48,7 @@ export function renderWithTemplate(
   }
 }
 
-export function replaceElement(templateFn, parentElement, data){
+export function replaceElement(templateFn, parentElement, data) {
   const element = document.querySelector(parentElement);
   element.replaceChildren();
   renderTemplate(templateFn, parentElement, data);
@@ -68,12 +68,7 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplate, footer);
   renderWithTemplate(headerTemplate, header);
 
-  let cartItems = getLocalStorage("so-cart");
-  if (cartItems.length != 0) {
-    let cartCount = document.getElementById("cart-count");
-    cartCount.innerHTML = cartItems.length;
-    cartCount.classList.remove("hidden");
-  }
+  cartCount();
 }
 
 export function getParams(param) {
@@ -95,3 +90,14 @@ export function renderTemplate(
   element.insertAdjacentHTML(position, templateFn(object));
 }
 
+export function cartCount() {
+  let cartItems = getLocalStorage("so-cart");
+  let cartCount = document.getElementById("cart-count");
+  if (cartItems.length != 0) {
+    cartCount.innerHTML = cartItems.length;
+    cartCount.classList.remove("hidden");
+  }
+  else {
+    cartCount.classList.add("hidden");
+  }
+}
