@@ -2,10 +2,12 @@ import { setLocalStorage, renderTemplate, cartCount } from "./utils.mjs";
 
 function productDetailsTemplate(product) {
 
-  let listPrice = parseInt(product.ListPrice);
-  let finalPrice = parseInt(product.FinalPrice);
-  const saleHTML = finalPrice < listPrice ? `<p class="on-sale">ON SALE</p>
-    <p class="tag">Save -$${((product.ListPrice - product.FinalPrice).toFixed(2))}</p>
+  let listPrice = parseFloat(product.ListPrice).toFixed(2);
+  let finalPrice = parseFloat(product.FinalPrice).toFixed(2);
+  let suggestedRetailPrice = parseInt(product.SuggestedRetailPrice);
+  let priceAfterDescount = parseInt(finalPrice -(suggestedRetailPrice - finalPrice)).toFixed(2);
+  const saleHTML = finalPrice < suggestedRetailPrice ? `<p class="on-sale">ON SALE</p>
+    <p class="tag">Save -$${((product.SuggestedRetailPrice.toFixed(2)  - product.FinalPrice).toFixed(2))}</p>
     <p class="product-card_price"><s>$${product.ListPrice}</s></p>` : "";
   const newProduct = `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
         <h2 class="divider">${product.NameWithoutBrand}</h2>
@@ -15,7 +17,7 @@ function productDetailsTemplate(product) {
           alt="${product.NameWithoutBrand}"
         />
         ${saleHTML}
-        <p class="product-card__price">$${product.FinalPrice}</p>
+        <p class="product-card__price">$${priceAfterDescount}</p>
         <p class="product__color">${product.Colors[0].ColorName}</p>
         <p class="product__description">
         ${product.DescriptionHtmlSimple}
