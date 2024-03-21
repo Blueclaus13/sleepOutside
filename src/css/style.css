@@ -338,3 +338,26 @@ footer {
 .hidden {
   display: none;
 }
+
+#order-summary{
+  border: 2px solid;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.output-summary h3{
+  padding-left: 1em;
+}
+#checkout-form{
+  width: 70%;
+  margin: auto;
+  padding: 1rem;
+}
+
+.summary-item{
+  display: flex;
+  justify-content:flex-start;
+  align-items: baseline;
+  gap: 1em;
+}
