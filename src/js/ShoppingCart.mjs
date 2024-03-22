@@ -13,7 +13,7 @@ function cartItemTemplate(item) {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
+    <p class="cart-card__quantity">qty: ${item.quantity}</p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
   </li>`;
 
@@ -51,9 +51,33 @@ export default class ShoppingCart {
     this.total = parseFloat(result).toFixed(2);
   }
 
-  renderProducts(element) {
-    renderListWithTemplate(cartItemTemplate, element, this.cartItems);
+  reduceList(){
+    const idCounts = this.cartItems.reduce((acc, item) => {
+      acc[item.Id] = (acc[item.Id] || 0) + 1; 
+      return acc;
+    }, {});
+
+    const modifiedCartItems = this.cartItems.map(item => ({
+      ...item, quantity: idCounts[item.Id] }));
+
+    const filteredList = modifiedCartItems.reduce((acc, current) => {
+      const x = acc.find(item => item.Id === current.Id);
+      if (!x) {
+        return acc.concat([current]);
+      } else {
+        return acc;
+      }
+    }, []);
+
+      console.log(filteredList);
+      return filteredList;
   }
+
+  renderProducts(element) {
+    const reducedList = this.reduceList();
+    renderListWithTemplate(cartItemTemplate, element, reducedList);
+  }
+
   getProductsId() {
     const idList = this.cartItems.map((item) => item.Id);
     return idList;
