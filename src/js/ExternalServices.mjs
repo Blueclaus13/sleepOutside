@@ -1,11 +1,13 @@
 //const baseURL = "http://server-nodejs.cit.byui.edu:3000/";
 const baseURL = import.meta.env.VITE_SERVER_URL
 
-function convertToJson(res) {
+async function convertToJson(res) {
+  const response = await res.json();
+  console.log(response);
   if (res.ok) {
     return res.json();
   } else {
-    throw new Error("Bad Response");
+    throw { name: "Service Error", message: response.message};
   }
 }
 
@@ -32,6 +34,6 @@ export default class ExternalServices {
       },
       body: JSON.stringify(payload),
     };
-    return await fetch("https://wdd330-backend.onrender.com:3000" + "/checkout/", options).then(convertToJson);
+    return await fetch("https://wdd330-backend.onrende.com:3000" + "/checkout/", options).then(convertToJson);
   }
 }
