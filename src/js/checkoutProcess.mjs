@@ -60,7 +60,7 @@ export default class CheckoutProcess {
     calculateTax() {
         this.tax = this.subTotal * .06;
     }
-    
+
     calculateTotal() {
         this.calculateSubTotal();
         this.calculateShipping();
@@ -70,16 +70,16 @@ export default class CheckoutProcess {
     }
 
     displayOrderTotals() {
-        document.getElementById("shipping").innerHTML = `$${this.shipping}`;
-        document.getElementById("cartTotal").innerHTML = `$${this.subTotal}`;
+        document.getElementById("shipping").innerHTML = `$${this.shipping.toFixed(2)}`;
+        document.getElementById("cartTotal").innerHTML = `$${this.subTotal.toFixed(2)}`;
         document.getElementById("orderTotal").innerHTML = `$${this.orderTotal}`;
-        document.getElementById("tax").innerHTML = `$${this.tax}`;
+        document.getElementById("tax").innerHTML = `$${this.tax.toFixed(2)}`;
         document.getElementById("num-items").innerHTML = `${this.itemTotal} items`;
     }
     async checkout() {
         const formElement = document.forms["checkout"];
         let json = formDataToJSON(formElement);
-        
+
         json.orderDate = new Date();
         json.orderTotal = this.orderTotal;
         json.tax = this.tax;
@@ -95,7 +95,7 @@ export default class CheckoutProcess {
             console.log(err);
             removeAllAlerts();
             alertMessage(err.message);
-            throw { name: "Service Error", message: err.message};
+            throw { name: "Service Error", message: err.message };
         }
     }
 }
