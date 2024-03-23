@@ -218,7 +218,9 @@ button:hover,
 }
 
 .product-detail img {
-  width: 100%;
+  width: 50vw;
+  margin: auto;
+  display: block;
 }
 
 /* Start cart list card styles */
@@ -406,4 +408,47 @@ input {
 
 legend {
   font-weight: bolder;
+}
+
+.notification {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #f0a868;
+  color: black;
+  padding: 10px 20px;
+  z-index: 10;
+  opacity: 0;
+}
+
+.appear {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.disappear {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
 }
