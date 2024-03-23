@@ -22,6 +22,7 @@ function productDetailsTemplate(product) {
         ${product.DescriptionHtmlSimple}
         </p>
       <div class="product-detail__add">
+        <div id="notification" class="notification">Item added to cart!</div>
         <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
       </div></section>`;
   return newProduct;
@@ -46,8 +47,23 @@ export default class ProductDetails {
     setLocalStorage("so-cart", this.localStore);
 
     cartCount();
+    this.cartNotification();
   }
   renderProductDetails(selector) {
     renderTemplate(productDetailsTemplate, selector, this.product);
+  }
+  cartNotification() {
+    var notification = document.getElementById('notification');
+    notification.classList.remove('appear');
+
+    setTimeout(function () {
+      notification.classList.remove('disappear');
+      notification.classList.add('appear');
+    }, 1);
+
+    setTimeout(function () {
+      notification.classList.remove('appear');
+      notification.classList.add('disappear');
+    }, 3000);
   }
 }
