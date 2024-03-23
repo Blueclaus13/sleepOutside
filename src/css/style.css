@@ -218,7 +218,9 @@ button:hover,
 }
 
 .product-detail img {
-  width: 100%;
+  width: 50vw;
+  margin: auto;
+  display: block;
 }
 
 /* Start cart list card styles */
