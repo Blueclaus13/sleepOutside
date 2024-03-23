@@ -94,7 +94,8 @@ header {
   color: var(--tertiary-color);
 }
 
-button {
+button,
+.button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -105,8 +106,15 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover,
+.button:hover {
   background-color: #303030;
+}
+
+.button {
+  width: fit-content;
+  margin: 15px;
+  text-decoration: none;
 }
 
 .divider {
@@ -339,25 +347,37 @@ footer {
   display: none;
 }
 
-#order-summary{
-  border: 2px solid;
-  margin: auto;
+#order-summary {
+  border: 2px solid #f0a868;
+  margin: 15px auto;
   width: 50%;
-  padding: 10px;
+  padding: 0px 7%;
 }
 
-.output-summary h3{
+.output-summary h3 {
   padding-left: 1em;
 }
-#checkout-form{
+
+#checkout-form {
   width: 70%;
   margin: auto;
   padding: 1rem;
 }
 
-.summary-item{
+.form-div {
   display: flex;
-  justify-content:flex-start;
+  flex-direction: column;
+  margin: 10px;
+}
+
+fieldset {
+  margin: 20px;
+  border-color: #f0a868;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: flex-start;
   align-items: baseline;
   gap: 1em;
 }
@@ -370,6 +390,20 @@ footer {
   background-color: var(--primary-color);
   border: 1px solid darkorange;
 }
-.alert > p {
+
+.alert>p {
   margin: 0;
+}
+
+input {
+  font-size: 16px;
+}
+
+
+#order-summary h3 {
+  text-align: center;
+}
+
+legend {
+  font-weight: bolder;
 }
